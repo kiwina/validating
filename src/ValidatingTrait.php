@@ -139,6 +139,10 @@ trait ValidatingTrait
                 $attributes[$key] = $value;
                 continue;
             }
+            if (method_exists($this, 'isEncryptedCastable') && $this->isEncryptedCastable($key)) {
+                $attributes[$key] = $value;
+                continue;
+            }
 
             $attributes[$key] = $this->getModel()->getAttributeValue($key);
         }
